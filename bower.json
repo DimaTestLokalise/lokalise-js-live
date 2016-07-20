@@ -1,0 +1,22 @@
+{
+  "name": "lokalise-live-js",
+  "homepage": "https://lokalise.co",
+  "description": "Lokalise Live JavaScript plugin",
+  "main": "lokalise.js",
+  "keywords": [
+    "lokalise",
+    "translation",
+    "live"
+  ],
+  "authors": [
+    "Youth Design LP"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
