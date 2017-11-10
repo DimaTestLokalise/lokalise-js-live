@@ -2,7 +2,7 @@
 Lokalise Live JavaScript library. Edit and save translations directly at your web-page.
 
 # Installation & Setup
-- include `lokalise.js` or `lokalise.js` in your html
+- include `lokalise.js` or `lokalise.min.js` in your html
 - Initialize script at the end of your html (jest before Body tag ends)
 ```
 Lokalise.init(ProjectId, Locale, ClassName, Callback);

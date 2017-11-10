@@ -40,7 +40,7 @@ var Lokalise = {
                     Lokalise.enable(token);
                 } else {
                     Lokalise._cookie.listen(Lokalise._cookieAuthTokenName, function (authToken) {
-                        var xhr = Lokalise._request('POST', '/api/oauth', 'token=' + encodeURIComponent(authToken)
+                        var xhr = Lokalise._request('POST', '/login/oauth', 'token=' + encodeURIComponent(authToken)
                             + '&id=' + encodeURIComponent(Lokalise.project) + '&ratelimit=0');
                         xhr.onreadystatechange = function () {
                             if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -52,8 +52,8 @@ var Lokalise = {
                                 if (response && typeof response.api_token !== 'undefined') {
                                     Lokalise._enabled = true;
                                     Lokalise.enable(response.api_token);
-                                } else if (response && typeof response.response.message !== 'undefined') {
-                                    alert(response.response.message);
+                                } else if (response && typeof response.message !== 'undefined') {
+                                    alert(response.message);
                                     console.error(response);
                                 } else {
                                     alert('Ops. Something went wrong. Please try again later.');
@@ -61,7 +61,7 @@ var Lokalise = {
                             }
                         };
                     });
-                    Lokalise._popup.open(Lokalise.lokaliseUrl + '/signin?oauth=1&referrer='
+                    Lokalise._popup.open(Lokalise.lokaliseUrl + '/login/oauth?oauth=1&referrer='
                         + encodeURIComponent(window.location.href.split('#')[0]), 'Lokalise');
                 }
             }
@@ -265,9 +265,9 @@ var Lokalise = {
         },
         set: function (name, value, options) {
             options = options || {
-                    expires: 86400,
-                    path: '/'
-                };
+                expires: 86400,
+                path: '/'
+            };
 
             var expires = options.expires;
 
