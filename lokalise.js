@@ -5,6 +5,7 @@ var Lokalise = {
     locale: null,
     onSave: null,
     lokaliseUrl: 'https://lokalise.co',
+    lokaliseApiUrl: 'https://api.lokalise.co',
 
     _enabled: false,
     _keysBound: false,
@@ -41,7 +42,7 @@ var Lokalise = {
                 } else {
                     Lokalise._cookie.listen(Lokalise._cookieAuthTokenName, function (authToken) {
                         var xhr = Lokalise._request('POST', '/login/oauth', 'token=' + encodeURIComponent(authToken)
-                            + '&id=' + encodeURIComponent(Lokalise.project) + '&ratelimit=0');
+                            + '&id=' + encodeURIComponent(Lokalise.project) + '&ratelimit=0', Lokalise.lokaliseUrl);
                         xhr.onreadystatechange = function () {
                             if (xhr.readyState == XMLHttpRequest.DONE) {
                                 try {
@@ -70,7 +71,6 @@ var Lokalise = {
         // should redirect to user.site.com/some/uri#lokalise/{authCode}
         var hash = window.location.hash.substr(1).split('/');
         if (typeof hash[0] !== 'undefined' && hash[0] === 'lokalise' && typeof hash[1] !== 'undefined') {
-            console.log(hash);
             Lokalise._cookie.set(Lokalise._cookieAuthTokenName, hash[1]);
             window.close();
         }
@@ -183,14 +183,15 @@ var Lokalise = {
             }
         });
     },
-    _request: function (method, url, data) {
+    _request: function (method, url, data, apiUrl) {
+        apiUrl = apiUrl || Lokalise.lokaliseApiUrl;
         var xhr = new XMLHttpRequest();
         if (!xhr) {
             console.error("Could not create XMLHttpRequest object");
             return false;
         }
         try {
-            xhr.open(method, Lokalise.lokaliseUrl + url);
+            xhr.open(method, apiUrl + url);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send(data);
             return xhr;
@@ -227,7 +228,6 @@ var Lokalise = {
         for (var i = 0; i < Lokalise._elements.length; i++) {
             element = Lokalise._elements[i];
             if (element.getAttribute('data-key') === key) {
-                console.log('Found', element);
                 element.innerHTML = value;
             }
         }
