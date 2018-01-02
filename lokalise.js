@@ -201,13 +201,11 @@ var Lokalise = {
     },
     _save: function (element) {
         var key = element.getAttribute('data-key'),
-            value = element.innerHTML,
-            translations = [],
-            translation = {},
+            value = element.innerHTML.trim(),
+            translations = {},
             success = false;
 
-        translation[Lokalise.locale] = value;
-        translations.push(translation);
+        translations[Lokalise.locale] = value;
 
         if (Lokalise.token || Lokalise.project) {
             success = Lokalise._request('POST', '/api/string/set', 'api_token=' + encodeURIComponent(Lokalise.token)
