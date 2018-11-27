@@ -6,4 +6,4 @@ This plugin does not download or fetch any translations from Lokalise, it's only
 
 # Integration
 
-Please read full docs article http://docs.lokalise.co/developer-docs/lokalise-livejs on integration instructions.
+Please read full docs article https://docs.lokalise.co/developer-docs/livejs-web-in-context-editor on integration instructions.
